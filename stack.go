@@ -5,15 +5,15 @@ package main
 // 	"sync"
 // )
 
-// type FifoQueueByArray struct {
+// type FifoQueue struct {
 // 	size         int
 // 	currentIndex int
 // 	data         []int
 // 	m            sync.RWMutex
 // }
 
-// func createFifoQueueByArray(size int) *FifoQueueByArray {
-// 	queue := FifoQueueByArray{
+// func createFifoQueue(size int) *FifoQueue {
+// 	queue := FifoQueue{
 // 		size: size,
 // 		currentIndex: 0,
 // 		data: make([]int, size),
@@ -22,15 +22,15 @@ package main
 // 	return &queue
 // }
 
-// func (queue *FifoQueueByArray) IsFull() bool {
+// func (queue *FifoQueue) IsFull() bool {
 // 	return queue.currentIndex >= queue.size
 // }
 
-// func (queue *FifoQueueByArray) IsEmpty() bool {
+// func (queue *FifoQueue) IsEmpty() bool {
 // 	return queue.currentIndex <= 0
 // }
 
-// func (queue *FifoQueueByArray) Put(value int) bool{
+// func (queue *FifoQueue) Put(value int) bool{
 // 	queue.m.Lock()
 // 	defer queue.m.Unlock()
 
@@ -43,7 +43,7 @@ package main
 // 	return true
 // }
 
-// func (queue *FifoQueueByArray) Pop() (int, error) {
+// func (queue *FifoQueue) Pop() (int, error) {
 // 	queue.m.Lock()
 // 	defer queue.m.Unlock()
 

@@ -38,9 +38,11 @@ func (tb *TokenBucket) start() {
 func (tb *TokenBucket) isAllowed() bool {
 	tb.m.Lock()
 	defer tb.m.Unlock()
-	if tb.tokenCount > 0 {
-		tb.tokenCount -= 1
-		return true
+
+	if tb.tokenCount <= 0 {
+		return false
 	}
-	return false
+
+	tb.tokenCount -= 1
+	return true
 }

@@ -7,7 +7,7 @@ import (
 
 // Main idea: tail chases head
 // Problem: but it will chase forever, how to loop around?
-type FifoQueueByArray struct {
+type FifoQueue struct {
 	size int
 	head int
 	tail int
@@ -15,8 +15,8 @@ type FifoQueueByArray struct {
 	m    sync.RWMutex
 }
 
-func createFifoQueueByArray(size int) *FifoQueueByArray {
-	queue := FifoQueueByArray{
+func createFifoQueue(size int) *FifoQueue {
+	queue := FifoQueue{
 		size: size,
 		head: 0,
 		tail: 0,
@@ -26,15 +26,15 @@ func createFifoQueueByArray(size int) *FifoQueueByArray {
 	return &queue
 }
 
-func (queue *FifoQueueByArray) IsFull() bool {
+func (queue *FifoQueue) IsFull() bool {
 	return queue.head-queue.tail >= queue.size
 }
 
-func (queue *FifoQueueByArray) IsEmpty() bool {
+func (queue *FifoQueue) IsEmpty() bool {
 	return queue.head == queue.tail
 }
 
-func (queue *FifoQueueByArray) Put(value int) bool {
+func (queue *FifoQueue) Put(value int) bool {
 	queue.m.Lock()
 	defer queue.m.Unlock()
 
@@ -47,7 +47,7 @@ func (queue *FifoQueueByArray) Put(value int) bool {
 	return true
 }
 
-func (queue *FifoQueueByArray) Pop() (int, error) {
+func (queue *FifoQueue) Pop() (int, error) {
 	queue.m.Lock()
 	defer queue.m.Unlock()
 

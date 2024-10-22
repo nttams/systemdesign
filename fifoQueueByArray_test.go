@@ -6,7 +6,7 @@ import (
 )
 
 func TestInsert(t *testing.T) {
-	queue := createFifoQueueByArray(10)
+	queue := createFifoQueue(10)
 
 	{
 		queue.Put(1)
